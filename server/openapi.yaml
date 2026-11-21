@@ -1,0 +1,207 @@
+openapi: 3.0.3
+
+info:
+  title: IDSC Student Portal API
+  description: REST API for the Infotech Development Systems College Student Portal.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development server
+
+tags:
+  - name: Health
+  - name: Dashboard
+  - name: Students
+  - name: Academics
+  - name: Enrollment
+  - name: Finance
+  - name: Library
+  - name: Faculty
+  - name: Clinic
+  - name: Announcements
+
+paths:
+
+  /health:
+    get:
+      tags: [Health]
+      summary: Check API health
+      responses:
+        "200":
+          description: API is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  /dashboard/{studentId}:
+    get:
+      tags: [Dashboard]
+      summary: Get student dashboard
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Dashboard data
+        "404":
+          description: Student not found
+
+  /students/{studentId}/profile:
+    get:
+      tags: [Students]
+      summary: Get student profile
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Student profile
+        "404":
+          description: Student not found
+
+  /students/{studentId}/subjects:
+    get:
+      tags: [Academics]
+      summary: Get student subjects
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Subject list
+
+  /students/{studentId}/grades:
+    get:
+      tags: [Academics]
+      summary: Get student grades
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Grades list
+        "404":
+          description: Student not found
+
+  /students/{studentId}/schedule:
+    get:
+      tags: [Academics]
+      summary: Get student schedule
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Schedule list
+        "404":
+          description: Student not found
+
+  /students/{studentId}/enrollment:
+    get:
+      tags: [Enrollment]
+      summary: Get student enrollment
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Enrollment information
+        "404":
+          description: Enrollment not found
+
+  /students/{studentId}/finance:
+    get:
+      tags: [Finance]
+      summary: Get student finance records
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Finance record
+        "404":
+          description: Finance record not found
+
+  /students/{studentId}/library:
+    get:
+      tags: [Library]
+      summary: Get student library information
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Library information
+        "404":
+          description: Library record not found
+
+  /faculty:
+    get:
+      tags: [Faculty]
+      summary: Get faculty directory
+      responses:
+        "200":
+          description: Faculty list
+
+  /students/{studentId}/clinic:
+    get:
+      tags: [Clinic]
+      summary: Get student clinic information
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2026-00123
+      responses:
+        "200":
+          description: Clinic information
+        "404":
+          description: Clinic record not found
+
+  /announcements:
+    get:
+      tags: [Announcements]
+      summary: Get announcements
+      responses:
+        "200":
+          description: Announcement list
